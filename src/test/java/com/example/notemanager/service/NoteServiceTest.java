@@ -1,5 +1,6 @@
 package com.example.notemanager.service;
 
+import com.example.notemanager.exception.NoteNotFoundException;
 import com.example.notemanager.model.Note;
 import com.example.notemanager.util.IdGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -119,7 +119,7 @@ class NoteServiceTest {
     void updateThrowsIfNoteDoesNotExist() {
         Note nonExistentNote = Note.builder().id(999L).title("nonexistent").content("no content").build();
 
-        assertThrows(NoSuchElementException.class, () -> {
+        assertThrows(NoteNotFoundException.class, () -> {
             noteService.update(nonExistentNote);
         });
     }
@@ -138,7 +138,7 @@ class NoteServiceTest {
 
     @Test
     void delete_ThrowsIfNoteDoesNotExist() {
-        assertThrows(NoSuchElementException.class, () -> {
+        assertThrows(NoteNotFoundException.class, () -> {
             noteService.delete(999L);
         });
     }

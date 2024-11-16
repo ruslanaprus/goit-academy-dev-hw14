@@ -1,5 +1,6 @@
 package com.example.notemanager.service;
 
+import com.example.notemanager.exception.NoteNotFoundException;
 import com.example.notemanager.model.Note;
 import com.example.notemanager.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -47,12 +47,12 @@ public class NoteService {
                     notes.put(note.getId(), updatedNote);
                     return updatedNote;
                 })
-                .orElseThrow(() -> new NoSuchElementException("Note with id " + note.getId() + " not found"));
+                .orElseThrow(() -> new NoteNotFoundException("Note with id " + note.getId() + " not found"));
     }
 
     public void delete(long id) {
         if (notes.remove(id) == null) {
-            throw new NoSuchElementException("Note with id " + id + " not found");
+            throw new NoteNotFoundException("Note with id " + id + " not found");
         }
     }
 }
