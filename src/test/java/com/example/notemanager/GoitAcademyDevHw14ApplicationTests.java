@@ -1,4 +1,4 @@
-package com.example.goit_academy_dev_hw14;
+package com.example.notemanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

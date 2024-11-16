@@ -1,4 +1,4 @@
-package com.example.goit_academy_dev_hw14.util;
+package com.example.notemanager.util;
 
 import org.junit.jupiter.api.Test;
 

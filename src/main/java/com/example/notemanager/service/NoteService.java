@@ -1,7 +1,8 @@
-package com.example.goit_academy_dev_hw14.service;
+package com.example.notemanager.service;
 
-import com.example.goit_academy_dev_hw14.model.Note;
-import com.example.goit_academy_dev_hw14.util.IdGenerator;
+import com.example.notemanager.model.Note;
+import com.example.notemanager.util.IdGenerator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,16 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
+@RequiredArgsConstructor
 public class NoteService {
-    private final Map<Long, Note> notes = new ConcurrentHashMap<>();
+    private final Map<Long, Note> notes;
     private final IdGenerator idGenerator;
-
-    public NoteService(IdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
-    }
 
     public List<Note> listAll() {
         return new ArrayList<>(notes.values());

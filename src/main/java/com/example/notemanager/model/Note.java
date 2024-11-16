@@ -1,4 +1,4 @@
-package com.example.goit_academy_dev_hw14.model;
+package com.example.notemanager.model;
 
 import lombok.Builder;
 import lombok.Getter;
