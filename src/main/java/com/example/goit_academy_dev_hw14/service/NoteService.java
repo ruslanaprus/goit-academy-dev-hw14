@@ -1,6 +1,8 @@
 package com.example.goit_academy_dev_hw14.service;
 
 import com.example.goit_academy_dev_hw14.model.Note;
+import com.example.goit_academy_dev_hw14.util.IdGenerator;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +10,15 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
+@Service
 public class NoteService {
     private final Map<Long, Note> notes = new ConcurrentHashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+    private final IdGenerator idGenerator;
+
+    public NoteService(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
+    }
 
     public List<Note> listAll() {
         return new ArrayList<>(notes.values());
@@ -23,7 +29,7 @@ public class NoteService {
     }
 
     public Note create(Note note) {
-        long id = idGenerator.getAndIncrement();
+        long id = idGenerator.generateId();
         Note newNote = Note.builder()
                 .id(id)
                 .title(note.getTitle())
